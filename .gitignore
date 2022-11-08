@@ -1,0 +1,5 @@
+server/dist
+frontend/build
+node_modules
+.env
+history.txt

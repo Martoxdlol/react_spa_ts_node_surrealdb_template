@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx cross-env NODE_ENV=development npx concurrently \"cd frontend && npm run start\" \"cd server && npm run start\" \"npm run dev_database\"",
+    "dev_database": "surreal start --log debug --user root --pass root memory",
+    "connect_db": "surreal sql --conn http://127.0.0.1:8000 --user root --pass root --ns app_db_development --db app_db",
+    "install": "npx concurrently \"cd frontend && npm run install\" \"cd server && npm run install\" \"cd shared && npm run install\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.5.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
