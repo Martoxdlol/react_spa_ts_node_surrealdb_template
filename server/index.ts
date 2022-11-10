@@ -1,13 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import * as config from 'shared/server_config'
-import { configure as configureDatabase } from './src/database/database'
-import { formatDate } from './src/util/util'
-import { sessionMiddleware } from './src/auth/session'
-import { authMiddleware } from './src/auth/auth'
+import { configure as configureDatabase } from './src/database/database.js'
+import { formatDate } from './src/util/util.js'
+import { sessionMiddleware } from './src/auth/session.js'
+import { authMiddleware } from './src/auth/auth.js'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import path from 'path'
-import { type } from 'os'
 
 const app = express()
 
@@ -20,6 +19,11 @@ async function main() {
     // Initialize database
     await configureDatabase()
 
+
+    if(config.isProduction) {
+        app.use(config.mainAppPath, express.static(path.resolve('../frontend/build')))
+    }
+
     app.use(cors())
     app.use(sessionMiddleware)
     app.use(authMiddleware)
@@ -27,9 +31,6 @@ async function main() {
     if (config.isDevelopment) {
         // If is dev, use proxy
         app.use(appProxy)
-    } else {
-        // Otherwise serve static files for build fontend
-        app.use(config.mainAppPath, express.static(path.resolve('../frontend/build')))
     }
 
     app.listen(config.serverPort, listenCallback)

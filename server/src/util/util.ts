@@ -1,10 +1,10 @@
 import moment from 'moment'
 import express from 'express'
 import ExpressSession from 'express-session'
-import { AppError } from 'shared/errors/errors'
+import { AppError } from 'shared/errors/errors.js'
 import { TokenSet } from 'openid-client';
-export * from 'shared/util'
-import { UserInfo } from 'shared/util';
+export * from 'shared/util.js'
+import { UserInfo } from 'shared/util.js';
 
 export function formatDate(date: Date) {
     return moment(date).format('YYYY/MM/DD hh/mm/ss Z')

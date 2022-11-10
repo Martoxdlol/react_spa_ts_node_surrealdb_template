@@ -1,4 +1,3 @@
-import internal from "stream";
 import { errorStrings } from "./error_strings";
 import { Request } from 'express'
 
@@ -44,26 +43,30 @@ export class AppError extends Error {
 }
 
 export class AuthError extends AppError {
+    public static CODE = 'auth_error'
     constructor() {
-        super('auth_error', { isInternal: false, status: 401 })
+        super(AuthError.CODE, { isInternal: false, status: 401 })
     }
 }
 
 export class PermissionError extends AppError {
+    public static CODE = 'permission_error'
     constructor() {
-        super('permission_error', { isInternal: false, status: 403 })
+        super(PermissionError.CODE, { isInternal: false, status: 403 })
     }
 }
 
 // Client side mostly
 export class NetworkError extends AppError {
+    public static CODE = 'network_error'
     constructor() {
-        super('network_error', { isInternal: false, status: 0 })
+        super(NetworkError.CODE, { isInternal: false, status: 0 })
     }
 }
 
 export class UnknownError extends AppError {
+    public static CODE = 'unknown_error'
     constructor() {
-        super('unknown_error', { isInternal: false, status: 0 })
+        super(UnknownError.CODE, { isInternal: false, status: 0 })
     }
 }

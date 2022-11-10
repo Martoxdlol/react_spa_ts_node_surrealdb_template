@@ -1,4 +1,4 @@
-import * as config from 'shared/client_config'
+import * as config from '../../client_config'
 import { AppError, NetworkError } from 'shared/errors/errors'
 
 export async function fetchApi<T>(endpoint: string, method: string = 'get', query?: { [key: string]: any }, body?: any) {
@@ -16,6 +16,7 @@ export async function fetchApi<T>(endpoint: string, method: string = 'get', quer
 
         return data as T
     } catch (error) {
+        console.log(error)
         if (error instanceof AppError) {
             throw error
         } else {

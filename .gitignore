@@ -3,3 +3,6 @@ frontend/build
 node_modules
 .env
 history.txt
+.cache
+.parcel-cache
+dist

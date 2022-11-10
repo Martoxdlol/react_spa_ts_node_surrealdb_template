@@ -1,9 +1,18 @@
-const stringsLanguage = process.env.LANGUAGE || 'es'
-const serverHost = process.env.APP_URL || 'localhost'
-const isDevelopment = process.env.NODE_ENV === 'development'
+let env: { [key: string]: string } = {}
+
+if (typeof process === 'undefined') {
+    env = (import.meta as any).env
+} else {
+    env = process.env as any
+}
+
+
+const stringsLanguage = env.LANGUAGE || 'es'
+const serverHost = env.APP_URL || 'localhost'
+const isDevelopment = env.MODE === 'development'
 const isProduction = !isDevelopment
 
-const serverScheme = process.env.SERVER_SCHEME || isDevelopment ? 'http' : 'https'
+const serverScheme = env.SERVER_SCHEME || isDevelopment ? 'http' : 'https'
 
 export {
     isDevelopment,
@@ -11,4 +20,5 @@ export {
     stringsLanguage,
     serverHost,
     serverScheme,
+    env,
 }

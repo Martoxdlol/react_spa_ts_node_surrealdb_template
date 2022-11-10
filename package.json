@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx cross-env NODE_ENV=development npx concurrently \"cd frontend && npm run start\" \"cd server && npm run start\" \"npm run dev_database\"",
+    "dev": "npx concurrently \"cd frontend && npm run dev\" \"cd server && npm run dev\" \"cd shared && npm run dev\" \"npm run dev_database\"",
+    "start": "npx concurrently \"cd frontend && npm run start\" \"cd server && npm run start\"",
     "dev_database": "surreal start --log debug --user root --pass root memory",
     "connect_db": "surreal sql --conn http://127.0.0.1:8000 --user root --pass root --ns app_db_development --db app_db",
-    "install": "npx concurrently \"cd frontend && npm run install\" \"cd server && npm run install\" \"cd shared && npm run install\""
+    "install": "npx concurrently \"cd frontend && npm install\" \"cd server && npm install\" \"cd shared && npm install\"",
+    "build": "npx concurrently \"cd frontend && npm run build\" \"cd server && npm run build\" \"cd shared && npm run build\""
   },
   "keywords": [],
   "author": "",
